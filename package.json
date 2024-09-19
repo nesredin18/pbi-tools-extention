@@ -1,11 +1,19 @@
 {
   "name": "pbi-tools",
   "displayName": "pbi-tools",
-  "description": "used for automating version control ",
+  "description": "Used for automating version control in Power BI",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.93.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nesredin18/pbi-tools-extention"
+  },
+  "bugs": {
+    "url": "https://github.com/nesredin18/pbi-tools-extention/issues"
+  },
+  "homepage": "https://github.com/nesredin18/pbi-tools-extention/blob/main/README.md",
   "categories": [
     "Other"
   ],
@@ -20,7 +28,7 @@
       },
       {
         "command": "pbi-tools.extractFile",
-        "title": "PBI Tools: Extract MOH.pbix"
+        "title": "PBI Tools: Extract"
       },
       {
         "command": "pbi-tools.compileFolder",
@@ -32,6 +40,7 @@
       }
     ]
   },
+  "icon": "resources/logo.jpg", 
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",

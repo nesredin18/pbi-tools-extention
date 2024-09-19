@@ -1,71 +1,74 @@
-# pbi-tools README
+# PBI Tools - VS Code Extension
 
-This is the README for your extension "pbi-tools". After writing up a brief description, we recommend including the following sections.
+[![Version](https://vsmarketplacebadge.apphb.com/version/Nesrunas.pbi-tools.svg)](https://marketplace.visualstudio.com/items?itemName=Nesrunas.pbi-tools)
+[![Installs](https://vsmarketplacebadge.apphb.com/installs/Nesrunas.pbi-tools.svg)](https://marketplace.visualstudio.com/items?itemName=Nesrunas.pbi-tools)
+[![Downloads](https://vsmarketplacebadge.apphb.com/downloads/Nesrunas.pbi-tools.svg)](https://marketplace.visualstudio.com/items?itemName=Nesrunas.pbi-tools)
+
+## Overview
+
+`PBI Tools` is a Visual Studio Code extension designed to automate Power BI version control processes directly from your code editor. This tool provides commands to extract data, compile Power BI files, and watch for changes — all from within VS Code.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- **Extract and Watch**: Automatically extracts Power BI reports and watches for changes with a simple command.
+- **Extract File**: Quickly extract data from a specific `.pbix` Power BI file.
+- **Compile Folder**: Compile a folder containing Power BI resources into a `.pbit` file format.
+- **Hello World Command**: A sample command to demonstrate how the extension works.
 
-For example if there is an image subfolder under your extension project workspace:
+## Commands
 
-\!\[feature X\]\(images/feature-x.png\)
+This extension registers several commands that can be accessed via the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac) or bound to custom keybindings:
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- `PBI Tools: Extract and Watch` (`pbi-tools.extractWatch`): Automatically extract Power BI data and watch for file changes.
+- `PBI Tools: Extract MOH.pbix` (`pbi-tools.extractFile`): Extract a specific `.pbix` file (default is `MOH.pbix`).
+- `PBI Tools: Compile Folder to PBIT` (`pbi-tools.compileFolder`): Compile a folder into a `.pbit` file format.
+- `PBI Tools: Hello World` (`pbi-tools.helloWorld`): Display a simple message to test the extension.
 
-## Requirements
+## Installation
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+### From the Visual Studio Code Marketplace
 
-## Extension Settings
+1. Open VS Code.
+2. Go to the Extensions view by clicking the Extensions icon in the Activity Bar or pressing `Ctrl+Shift+X`.
+3. Search for `PBI Tools`.
+4. Click **Install**.
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+### From a VSIX File
 
-For example:
+1. Download the latest `.vsix` file from the [Releases](https://github.com/your-repo/pbi-tools/releases) page.
+2. Open VS Code.
+3. Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac) and type `Extensions: Install from VSIX...`.
+4. Select the downloaded `.vsix` file.
 
-This extension contributes the following settings:
+## Usage
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+1. **Extract and Watch**: Open the Command Palette (`Ctrl+Shift+P`), type `PBI Tools: Extract and Watch`, and select the command. This will extract Power BI data and monitor the file for changes.
+2. **Extract File**: Open the Command Palette, search for `PBI Tools: Extract MOH.pbix`, and extract the file.
+3. **Compile Folder**: Open the Command Palette, search for `PBI Tools: Compile Folder to PBIT`, and select the folder to compile it into a `.pbit` format.
+4. **Hello World**: Test the extension by running the `PBI Tools: Hello World` command.
 
-## Known Issues
+## Icon
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+The extension icon is stored in the `resources` folder and is used in the Visual Studio Marketplace and within VS Code to represent this extension.
 
-## Release Notes
+## Development
 
-Users appreciate release notes as you update your extension.
+To work on the extension locally:
 
-### 1.0.0
+1. Clone this repository.
+2. Run `npm install` to install dependencies.
+3. Press `F5` to start a new VS Code window with the extension running in development mode.
 
-Initial release of ...
+### Packaging and Publishing
 
-### 1.0.1
+To package and publish the extension:
 
-Fixed issue #.
+1. Make sure you have [VSCE](https://code.visualstudio.com/api/working-with-extensions/publishing-extension) installed:
 
-### 1.1.0
+   ```bash
+   npm install -g vsce
 
-Added features X, Y, and Z.
+## License
 
----
+This project is licensed under the MIT License - see the [LICENSE.md](./LICENSE.md) file for details.
 
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
