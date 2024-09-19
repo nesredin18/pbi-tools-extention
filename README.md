@@ -46,7 +46,7 @@ This extension registers several commands that can be accessed via the Command P
 ## Usage
 
 1. **Extract and Watch**: Open the Command Palette (`Ctrl+Shift+P`), type `PBI Tools: Extract and Watch`, and select the command. This will extract Power BI data and monitor the file for changes.
-2. **Extract File**: Open the Command Palette, search for `PBI Tools: Extract MOH.pbix`, and extract the file.
+2. **Extract File**: Open the Command Palette, search for `PBI Tools: Extract`, and extract the file.
 3. **Compile Folder**: Open the Command Palette, search for `PBI Tools: Compile Folder to PBIT`, and select the folder to compile it into a `.pbit` format.
 4. **Hello World**: Test the extension by running the `PBI Tools: Hello World` command.
 
