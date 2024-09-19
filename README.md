@@ -1,8 +1,11 @@
 # PBI Tools - VS Code Extension
 
-[![Version](https://vsmarketplacebadge.apphb.com/version/Nesrunas.pbi-tools.svg)](https://marketplace.visualstudio.com/items?itemName=Nesrunas.pbi-tools)
-[![Installs](https://vsmarketplacebadge.apphb.com/installs/Nesrunas.pbi-tools.svg)](https://marketplace.visualstudio.com/items?itemName=Nesrunas.pbi-tools)
-[![Downloads](https://vsmarketplacebadge.apphb.com/downloads/Nesrunas.pbi-tools.svg)](https://marketplace.visualstudio.com/items?itemName=Nesrunas.pbi-tools)
+![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/<publisher>.<extension-id>?label=version)
+(https://marketplace.visualstudio.com/items?itemName=Nesrunas.pbi-tools)
+![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/<publisher>.<extension-id>?label=installs)
+(https://marketplace.visualstudio.com/items?itemName=Nesrunas.pbi-tools)
+![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/<publisher>.<extension-id>?label=downloads)
+(https://marketplace.visualstudio.com/items?itemName=Nesrunas.pbi-tools)
 
 ## Overview
 
