@@ -20,7 +20,7 @@
 This extension registers several commands that can be accessed via the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac) or bound to custom keybindings:
 
 - `PBI Tools: Extract and Watch` (`pbi-tools.extractWatch`): Automatically extract Power BI data and watch for file changes.
-- `PBI Tools: Extract MOH.pbix` (`pbi-tools.extractFile`): Extract a specific `.pbix` file (default is `MOH.pbix`).
+- `PBI Tools: Extract` (`pbi-tools.extractFile`): Extract a specific `.pbix` file (default is `MOH.pbix`).
 - `PBI Tools: Compile Folder to PBIT` (`pbi-tools.compileFolder`): Compile a folder into a `.pbit` file format.
 - `PBI Tools: Hello World` (`pbi-tools.helloWorld`): Display a simple message to test the extension.
 
