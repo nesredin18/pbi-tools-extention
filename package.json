@@ -39,7 +39,24 @@
         "command": "pbi-tools.helloWorld",
         "title": "PBI Tools: Hello World"
       }
-    ]
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "pbiTools",
+          "title": "PBI Tools",
+          "icon": "resources/logo.jpg"
+        }
+      ]
+    },
+    "views": {
+      "pbiTools": [
+        {
+          "id": "pbiToolsView",
+          "name": "PBI Tools View"
+        }
+      ]
+    }
   },
   "icon": "resources/logo.jpg", 
   "scripts": {
