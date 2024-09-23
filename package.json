@@ -43,8 +43,27 @@
         "title": "PBI Tools: Setup pbi-tools"
       }
 
-    ]
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "pbiTools",
+          "title": "PBI Tools",
+          "icon": "resources/activity-bar-icon.png"
+        }
+      ]
+    },
+    "views": {
+      "pbiTools": [
+        {
+          "type": "webview",
+          "id": "pbiToolsView",
+          "name": "PBI Tools View"
+        }
+      ]
+    }
   },
+  
   "icon": "resources/logo.jpg",
   "scripts": {
     "vscode:prepublish": "npm run compile",
