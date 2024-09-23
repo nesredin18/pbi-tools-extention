@@ -11,8 +11,12 @@
 
 `PBI Tools` is a Visual Studio Code extension designed to automate Power BI version control processes directly from your code editor. This tool provides commands to extract data, compile Power BI files, and watch for changes — all from within VS Code.
 
-## Features
+## Rules
+- **Multiple .pbix Files**: The extract and compile commands require exactly one .pbix file in the workspace folder. If multiple .pbix files are found, an error message will be shown.
+- **Folder Structure**: When compiling, the folder containing the extracted files must match the .pbix filename.
 
+## Features
+- **Setup Pbi-tools**:Automatically downloads, extracts pbi-tools, and registers it to the environment variable.
 - **Extract and Watch**: Automatically extracts Power BI reports and watches for changes with a simple command.
 - **Extract File**: Quickly extract data from a specific `.pbix` Power BI file.
 - **Compile Folder**: Compile a folder containing Power BI resources into a `.pbit` file format.
@@ -22,6 +26,7 @@
 
 This extension registers several commands that can be accessed via the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac) or bound to custom keybindings:
 
+- `PBI Tools: Setup`(`pbi-tools.setup`): Automatically sets up pbi-tools by downloading and extracting the necessary files and registering the tool to your environment.
 - `PBI Tools: Extract and Watch` (`pbi-tools.extractWatch`): Automatically extract Power BI data and watch for file changes.
 - `PBI Tools: Extract` (`pbi-tools.extractFile`): Extract a specific `.pbix` file (default is `MOH.pbix`).
 - `PBI Tools: Compile Folder to PBIT` (`pbi-tools.compileFolder`): Compile a folder into a `.pbit` file format.
@@ -38,7 +43,7 @@ This extension registers several commands that can be accessed via the Command P
 
 ### From a VSIX File
 
-1. Download the latest `.vsix` file from the [Releases](https://github.com/your-repo/pbi-tools/releases) page.
+1. Download the latest `.vsix` file from the [Releases](https://github.com/nesredin18/pbi-tools-extention/releases) page.
 2. Open VS Code.
 3. Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac) and type `Extensions: Install from VSIX...`.
 4. Select the downloaded `.vsix` file.
