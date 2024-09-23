@@ -11,10 +11,6 @@
 
 `PBI Tools` is a Visual Studio Code extension designed to automate Power BI version control processes directly from your code editor. This tool provides commands to extract data, compile Power BI files, and watch for changes — all from within VS Code.
 
-## Rules
-- **Multiple .pbix Files**: The extract and compile commands require exactly one .pbix file in the workspace folder. If multiple .pbix files are found, an error message will be shown.
-- **Folder Structure**: When compiling, the folder containing the extracted files must match the .pbix filename.
-
 ## Features
 - **Setup Pbi-tools**:Automatically downloads, extracts pbi-tools, and registers it to the environment variable.
 - **Extract and Watch**: Automatically extracts Power BI reports and watches for changes with a simple command.
