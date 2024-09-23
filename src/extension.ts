@@ -18,39 +18,6 @@ export  function activate(context: vscode.ExtensionContext) {
         context.subscriptions.push(setupCommand);
 
 
-    // Function to get .pbix files in the current workspace folder
-    function getPbixFiles(): string[] {
-        const workspaceFolder = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-
-        if (!workspaceFolder) {
-            vscode.window.showErrorMessage('No workspace folder is open.');
-            return [];
-        }
-
-        // Get all .pbix files in the workspace folder
-        const pbixFiles = fs.readdirSync(workspaceFolder)
-            .filter(file => file.endsWith('.pbix'))
-            .map(file => path.join(workspaceFolder, file));
-
-        return pbixFiles;
-    }
-
-    // Function to check if there is exactly one .pbix file
-    function validateSinglePbixFile(): string | null {
-        const pbixFiles = getPbixFiles();
-
-        if (pbixFiles.length === 0) {
-            vscode.window.showErrorMessage('No .pbix file found in the workspace.');
-            return null;
-        }
-
-        if (pbixFiles.length > 1) {
-            vscode.window.showErrorMessage('Multiple .pbix files found. Please ensure only one .pbix file is present.');
-            return null;
-        }
-
-        return pbixFiles[0];  // Return the single .pbix file path
-    }
 
     // Function to execute `pbi-tools info` command and return parsed JSON result
     function getPbiToolsInfo(): Promise<any> {
@@ -79,46 +46,79 @@ export  function activate(context: vscode.ExtensionContext) {
             });
         });
     }
-	    // Register Command for: pbi-tools extract - extract the single .pbix file
-		const extractFile = vscode.commands.registerCommand('pbi-tools.extractFile', () => {
-			const pbixFile = validateSinglePbixFile();
-	
-			if (pbixFile) {
-				const terminal = vscode.window.createTerminal('pbi-tools');
-				terminal.sendText(`pbi-tools extract "${pbixFile}"`);
-				terminal.show();
-			}
-		});
+    // Register Command for: pbi-tools extract - extract the single .pbix file
+    const extractFile = vscode.commands.registerCommand('pbi-tools.extractFile', async () => {
+        // Open file picker for the user to select a .pbix file
+        const pbixFileUri = await vscode.window.showOpenDialog({
+            canSelectFiles: true,
+            canSelectMany: false,
+            filters: { 'Power BI Files': ['pbix'] }, // Restrict to .pbix files
+            openLabel: 'Select PBIX file to extract'
+        });
 
-		    // Register Command for: pbi-tools compile
-			const compileFolder = vscode.commands.registerCommand('pbi-tools.compileFolder', () => {
-				const pbixFile = validateSinglePbixFile();
-		
-				if (pbixFile) {
-					const pbixFileName = path.basename(pbixFile, '.pbix'); // Get the filename without extension
-					const workspaceFolder = path.dirname(pbixFile);
-		
-					const folderToCompile = path.join(workspaceFolder, pbixFileName);
-		
-					// Check if the folder exists
-					if (!fs.existsSync(folderToCompile)) {
-						vscode.window.showErrorMessage(`Folder "${pbixFileName}" not found. Expected folder with the same name as the .pbix file.`);
-						return;
-					}
-		
-					const terminal = vscode.window.createTerminal('pbi-tools');
-					terminal.sendText(`pbi-tools compile "${folderToCompile}" -format PBIT -overwrite`);
-					terminal.show();
-				}
-			});
+        // Check if the user selected a file
+        if (!pbixFileUri || pbixFileUri.length === 0) {
+            vscode.window.showErrorMessage('No PBIX file selected. Please select a PBIX file.');
+            return;
+        }
+
+        const pbixFile = pbixFileUri[0].fsPath;
+
+        // Run the extract command in the terminal
+        const terminal = vscode.window.createTerminal('pbi-tools');
+        terminal.sendText(`pbi-tools extract "${pbixFile}"`);
+        terminal.show();
+    });
+
+
+    // Register Command for: pbi-tools compile
+    const compileFolder = vscode.commands.registerCommand('pbi-tools.compileFolder', async () => {
+
+        // Open folder picker for the user to choose a folder
+        const folderUri = await vscode.window.showOpenDialog({
+            canSelectFolders: true,
+            canSelectMany: false,
+            openLabel: 'Select folder to compile'
+        });
+
+        // Check if the user selected a folder
+        if (!folderUri || folderUri.length === 0) {
+            vscode.window.showErrorMessage('No folder selected. Please select a folder to compile.');
+            return;
+        }
+
+        const folderToCompile = folderUri[0].fsPath;
+
+        // Check if the folder exists
+        if (!fs.existsSync(folderToCompile)) {
+            vscode.window.showErrorMessage(`Folder "${folderToCompile}" not found.`);
+            return;
+        }
+
+        // Run the pbi-tools compile command in the terminal
+        const terminal = vscode.window.createTerminal('pbi-tools');
+        terminal.sendText(`pbi-tools compile "${folderToCompile}" -format PBIT -overwrite`);
+        terminal.show();
+    });
+
 
     // Register Command for: pbi-tools extract -pid id -watch
     const extractWatch = vscode.commands.registerCommand('pbi-tools.extractWatch', async () => {
-        const pbixFile = validateSinglePbixFile();
+        // Open file picker for the user to select a .pbix file
+        const pbixFileUri = await vscode.window.showOpenDialog({
+            canSelectFiles: true,
+            canSelectMany: false,
+            filters: { 'Power BI Files': ['pbix'] }, // Restrict to .pbix files
+            openLabel: 'Select PBIX file'
+        });
 
-        if (!pbixFile) {
-            return; // If no valid .pbix file, exit early
+        // Check if the user selected a file
+        if (!pbixFileUri || pbixFileUri.length === 0) {
+            vscode.window.showErrorMessage('No PBIX file selected. Please select a PBIX file.');
+            return;
         }
+
+        const pbixFile = pbixFileUri[0].fsPath;
 
         try {
             // Get the result of `pbi-tools info`
@@ -126,11 +126,12 @@ export  function activate(context: vscode.ExtensionContext) {
 
             // Get directory of the current .pbix file
             const pbixFileDirectory = path.dirname(pbixFile);
-			// Convert both the PBIX file path and session paths to lowercase for comparison
-			const pbixFileLowerCase = pbixFile.toLowerCase();
+            
+            // Convert both the PBIX file path and session paths to lowercase for comparison
+            const pbixFileLowerCase = pbixFile.toLowerCase();
 
             // Find the matching session for the .pbix file
-			const matchingSession = infoResult.pbiSessions.find((session: any) => session.PbixPath.toLowerCase() === pbixFileLowerCase);
+            const matchingSession = infoResult.pbiSessions.find((session: any) => session.PbixPath.toLowerCase() === pbixFileLowerCase);
             if (!matchingSession) {
                 vscode.window.showErrorMessage(`The PBIX file "${pbixFile}" is not currently launched in Power BI Desktop.`);
                 return;
@@ -147,6 +148,7 @@ export  function activate(context: vscode.ExtensionContext) {
             vscode.window.showErrorMessage(`Error during pbi-tools info or extraction: ${error}`);
         }
     });
+
 
     // Register the new commands
     context.subscriptions.push(extractWatch);
