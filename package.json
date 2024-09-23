@@ -2,7 +2,7 @@
   "name": "pbi-tools",
   "displayName": "pbi-tools",
   "description": "Used for automating version control in Power BI",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "publisher": "Nesrunas",
   "engines": {
     "vscode": "^1.93.0"
